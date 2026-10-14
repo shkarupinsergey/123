@@ -37,7 +37,7 @@ def draw():
 
             q = (a - 0.25) ** 2 + b ** 2
             if q * (q + a - 0.25) <= 0.25 * b ** 2 or (a + 1) ** 2 + b ** 2 <= 0.0625:
-                line.append(FRACTAL_COLOR) # Используется константа FRACTAL_COLOR
+                line.append(FRACTAL_COLOR)
                 continue
 
             x = y = 0.0
@@ -47,7 +47,7 @@ def draw():
                     line.append(colors[n])
                     break
             else:
-                line.append(FRACTAL_COLOR) # Используется константа FRACTAL_COLOR
+                line.append(FRACTAL_COLOR)
 
         image.put('{' + ' '.join(line) + '}', to=(0, py))
 
@@ -81,8 +81,9 @@ tk.Scale(panel, from_=5, to=150, resolution=5, variable=iterations,
          label='Число итераций', orient='horizontal', length=185,
          command=redraw).pack(side='left', padx=5)
 tk.Button(panel, text='Сбросить', command=reset).pack(side='left', padx=10)
-
-tk.Label(root, text='Нажмите на изображение, чтобы выбрать центр увеличения').pack(pady=(0, 5))
+tk.Label(root, text='ЛКМ - выбрать центр | Клавиша "R" - сбросить').pack(pady=(0, 5))
 canvas.bind('<Button-1>', move_center)
+root.bind('<r>', lambda event: reset())
+root.bind('<R>', lambda event: reset())
 root.after(100, draw)
 root.mainloop()
