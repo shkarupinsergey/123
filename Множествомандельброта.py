@@ -11,11 +11,10 @@ root.title('Множество Мандельброта')
 root.resizable(False, False)
 
 image = tk.PhotoImage(width=WIDTH, height=HEIGHT)
-canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg=BG_COLOR, highlightthickness=0)
+canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg=BG_COLOR, highlightthickness=0, cursor="crosshair")
 canvas.pack()
 canvas.create_image(0, 0, image=image, anchor='nw')
-
-panel = tk.Frame(root)
+panel = tk.Frame(root, bd=2, relief="groove")
 panel.pack(pady=5)
 zoom = tk.IntVar(value=1)
 iterations = tk.IntVar(value=70)
@@ -74,13 +73,13 @@ def reset():
     iterations.set(70)
     redraw()
 
-
 tk.Scale(panel, from_=1, to=30, variable=zoom, label='Увеличение',
          orient='horizontal', length=185, command=redraw).pack(side='left', padx=5)
 tk.Scale(panel, from_=5, to=150, resolution=5, variable=iterations,
          label='Число итераций', orient='horizontal', length=185,
          command=redraw).pack(side='left', padx=5)
 tk.Button(panel, text='Сбросить', command=reset).pack(side='left', padx=10)
+
 tk.Label(root, text='ЛКМ - выбрать центр | Клавиша "R" - сбросить').pack(pady=(0, 5))
 canvas.bind('<Button-1>', move_center)
 root.bind('<r>', lambda event: reset())
