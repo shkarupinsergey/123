@@ -3,13 +3,15 @@ import tkinter as tk
 WIDTH, HEIGHT = 540, 400
 center_x, center_y = -0.6, 0.0
 pending = None
+BG_COLOR = 'black'
+FRACTAL_COLOR = '#a00000'
 
 root = tk.Tk()
 root.title('Множество Мандельброта')
 root.resizable(False, False)
 
 image = tk.PhotoImage(width=WIDTH, height=HEIGHT)
-canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg='black', highlightthickness=0)
+canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg=BG_COLOR, highlightthickness=0)
 canvas.pack()
 canvas.create_image(0, 0, image=image, anchor='nw')
 
@@ -33,10 +35,9 @@ def draw():
         for px in range(WIDTH):
             a = center_x + (px - WIDTH / 2) * step
 
-            # Точки внутри главных областей множества.
             q = (a - 0.25) ** 2 + b ** 2
             if q * (q + a - 0.25) <= 0.25 * b ** 2 or (a + 1) ** 2 + b ** 2 <= 0.0625:
-                line.append('#a00000')
+                line.append(FRACTAL_COLOR) # Используется константа FRACTAL_COLOR
                 continue
 
             x = y = 0.0
@@ -46,7 +47,7 @@ def draw():
                     line.append(colors[n])
                     break
             else:
-                line.append('#a00000')
+                line.append(FRACTAL_COLOR) # Используется константа FRACTAL_COLOR
 
         image.put('{' + ' '.join(line) + '}', to=(0, py))
 
