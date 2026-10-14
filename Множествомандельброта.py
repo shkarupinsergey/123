@@ -11,7 +11,6 @@ root.title('Множество Мандельброта')
 root.resizable(False, False)
 
 image = tk.PhotoImage(width=WIDTH, height=HEIGHT)
-# Добавлен параметр cursor="crosshair"
 canvas = tk.Canvas(root, width=WIDTH, height=HEIGHT, bg=BG_COLOR, highlightthickness=0, cursor="crosshair")
 canvas.pack()
 canvas.create_image(0, 0, image=image, anchor='nw')
